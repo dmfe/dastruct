@@ -1,8 +1,9 @@
-/bin
-/obj
-/.vscode
-/.cache
-/.git
-/release*
+bin/
+obj/
+.vscode/
+.cache/
+.git/
+release*
 compile_commands.json
 *.gz
+**/bin/

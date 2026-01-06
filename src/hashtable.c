@@ -164,7 +164,9 @@ void *hash_table_retrieve(Hash_table *ht, const char *key) {
         prev->next = tmp->next;
     }
     void *result = tmp->value;
+    free(tmp->key);
     free(tmp);
+
     return result;
 }
 
