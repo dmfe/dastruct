@@ -1,0 +1,8 @@
+/bin
+/obj
+/.vscode
+/.cache
+/.git
+/release*
+compile_commands.json
+*.gz
