@@ -37,7 +37,7 @@ MEMTEST_UTIL=valgrind
 
 .PHONY: all test clean release
 
-all: $(TARGETS)
+all: $(TARGETS) test
 
 release: CFLAGS=-Wall -O2 -DNDEBUG -D_REENTRANT
 release: STRIPPED=-s
@@ -60,7 +60,7 @@ $(OBJ_DIR)/%.o: $(SRC_DIR)/%.c $(HDRS) | $(OBJ_DIR)
 	$(CC) $(CFLAGS) -c $< -o $@ -I$(SRC_DIR)
 
 test: $(SO) $(TST_BINS)
-	for test in $(TST_BINS) ; do ./$$test --verbose ; done
+	for test in $(TST_BINS) ; do ./$$test --verbose -j1 ; done
 
 # Test bins  depends on source test c-files and bin directory
 $(TST_BIN_DIR)/%: $(TST_DIR)/%.c | $(TST_BIN_DIR)

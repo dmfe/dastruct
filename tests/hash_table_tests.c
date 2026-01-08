@@ -6,7 +6,7 @@
 
 Hash_table *ht;
 
-void suit_setup() {
+void suite_setup() {
     ht = hash_table_create(NULL, NULL);
 }
 
@@ -14,7 +14,7 @@ void suite_teardown() {
     hash_table_destroy(ht);
 }
 
-TestSuite(hash_table_tests, .init=suit_setup, .fini=suite_teardown);
+TestSuite(hash_table_tests, .init=suite_setup, .fini=suite_teardown);
 
 Test(hash_table_tests, hash_table_create) {
     cr_expect_not_null(ht, "hash_table_create should return not NULL");

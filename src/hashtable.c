@@ -85,24 +85,6 @@ void hash_table_destroy(Hash_table *ht) {
     free(ht);
 }
 
-void hash_table_print(Hash_table *ht) {
-    printf("---Start Hash Table---\n");
-    for (uint32_t i = 0; i < ht->capacity; i++) {
-        if (ht->buckets[i] == NULL) {
-            //printf("\t%i\t---\n", i);
-        } else {
-            printf("\t%i\t", i);
-            entry *tmp = ht->buckets[i];
-            while(tmp != NULL) {
-                printf("\"%s\"(%p) - ", tmp->key, tmp->value);
-                tmp = tmp->next;
-            }
-            printf("\n");
-        }
-    }
-    printf("---End Hash Table---\n");
-}
-
 bool hash_table_insert(Hash_table *ht, const char *key, void *value) {
     if (ht == NULL || key == NULL || value == NULL) return false;
 
@@ -180,4 +162,22 @@ uint32_t hash_table_capacity(Hash_table *ht) {
 
 uint32_t hash_table_size(Hash_table *ht) {
     return ht->size;
+}
+
+void hash_table_print(Hash_table *ht) {
+    printf("---Start Hash Table---\n");
+    for (uint32_t i = 0; i < ht->capacity; i++) {
+        if (ht->buckets[i] == NULL) {
+            //printf("\t%i\t---\n", i);
+        } else {
+            printf("\t%i\t", i);
+            entry *tmp = ht->buckets[i];
+            while(tmp != NULL) {
+                printf("\"%s\"(%p) - ", tmp->key, tmp->value);
+                tmp = tmp->next;
+            }
+            printf("\n");
+        }
+    }
+    printf("---End Hash Table---\n");
 }
