@@ -6,7 +6,7 @@
 
 #include "vector.h"
 
-#define INITIAL_CAPACITY 256
+#define INITIAL_CAPACITY 32
 
 struct _vector {
     uint32_t size;
@@ -131,6 +131,15 @@ void vector_delete_nosh(Vector *v, uint32_t index) {
     v->cleanup(v->data[index]);
     v->data[index] = 0;
     v->size--;
+}
+
+uint32_t vector_get_next_null_pos(Vector *v, uint32_t start_pos) {
+    uint32_t next_pos = start_pos + 1;
+    while (next_pos < v->capacity) {
+        if (v->data[next_pos] == NULL) break;
+        next_pos++;
+    }
+    return next_pos;
 }
 
 uint32_t vector_size(Vector *v) {

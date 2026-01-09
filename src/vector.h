@@ -14,6 +14,7 @@ void *vector_pop(Vector *v);
 void *vector_get(Vector *v, uint32_t index);
 void vector_delete(Vector *v, uint32_t index);
 void vector_delete_nosh(Vector *v, uint32_t index);
+uint32_t vector_get_next_null_pos(Vector *v, uint32_t start_pos);
 uint32_t vector_size(Vector *v);
 uint32_t vector_capacity(Vector *v);
 

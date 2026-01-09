@@ -206,6 +206,19 @@ Test(vector_tests, vector_delete_nosh_elements_doesnt_shifted) {
     cr_expect_null(res2, "there should be empty element after deletion of the middle element");
 }
 
+Test(vector_tests, vector_get_next_null_pos) {
+    char *e1 = strdup("e1");
+    char *e2 = strdup("e2");
+    char *e3 = strdup("e3");
+    vector_push(v, e1);
+    vector_push(v, e2);
+    vector_push(v, e3);
+
+    uint32_t result = vector_get_next_null_pos(v, 0);
+
+    cr_expect_eq(3, result, "Next NULL position of three element vector should be three");
+}
+
 Test(vector_tests, vector_size) {
     char *e = strdup("e");
     vector_push(v, e);
