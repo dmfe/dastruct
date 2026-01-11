@@ -63,7 +63,7 @@ test: $(SO) $(TST_BINS)
 	for test in $(TST_BINS) ; do ./$$test --verbose -j1 ; done
 
 # Test bins  depends on source test c-files and bin directory
-$(TST_BIN_DIR)/%: $(TST_DIR)/%.c | $(TST_BIN_DIR)
+$(TST_BIN_DIR)/%: $(TST_DIR)/%.c $(OBJS) | $(TST_BIN_DIR)
 	$(CC) $(CFLAGS) $< $(OBJS) -o $@ -lcriterion
 
 # Test bin directory creation

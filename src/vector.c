@@ -39,6 +39,8 @@ static bool vector_expand(Vector *v, uint32_t new_size) {
 
 Vector *vector_create(cleanupfunction *clf) {
     Vector *v = malloc(sizeof(*v));
+    if (v == NULL) return NULL;
+
     v->size = 0;
     v->capacity = INITIAL_CAPACITY;
     v->cleanup = clf != NULL ? clf : free;

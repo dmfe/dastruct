@@ -59,11 +59,13 @@ static void hash_table_expand(Hash_table *ht) {
 
 Hash_table *hash_table_create(hash_function *hf, cleanupfunction clf) {
     Hash_table *ht = malloc(sizeof(*ht));
+    if (ht == NULL) return NULL;
+
     ht->capacity = INITIAL_CAPACITY;
     ht->size = 0;
     ht->collisions = 0;
     ht->hash = hf != NULL ? hf : hash_fnv1;
-    ht->cleanup = clf != NULL ? clf: free;
+    ht->cleanup = clf != NULL ? clf : free;
     // calloc zeroes out the memory
     ht->buckets = calloc(ht->capacity, sizeof(entry*));
     return ht;
