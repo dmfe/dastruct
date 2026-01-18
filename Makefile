@@ -12,6 +12,10 @@ OBJ_DIR=obj
 BIN_DIR=bin
 RELEASE_DIR=release-$(VERSION)
 
+# Libs
+LIBS=-lm
+TST_LIBS=-lcriterion
+
 # Source files
 SRCS=$(wildcard $(SRC_DIR)/*.c)
 TST_SRCS=$(wildcard $(TST_DIR)/*.c)
@@ -61,10 +65,12 @@ $(OBJ_DIR)/%.o: $(SRC_DIR)/%.c $(HDRS) | $(OBJ_DIR)
 
 test: $(SO) $(TST_BINS)
 	for test in $(TST_BINS) ; do ./$$test --verbose -j1 ; done
+test_%: $(TST_BIN_DIR)/%_tests
+	./$< --verbose -j1
 
 # Test bins  depends on source test c-files and bin directory
 $(TST_BIN_DIR)/%: $(TST_DIR)/%.c $(OBJS) | $(TST_BIN_DIR)
-	$(CC) $(CFLAGS) $< $(OBJS) -o $@ -lcriterion
+	$(CC) $(CFLAGS) $< $(OBJS) -o $@ $(LIBS) $(TST_LIBS)
 
 # Test bin directory creation
 $(TST_BIN_DIR):
